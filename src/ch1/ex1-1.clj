@@ -1,4 +1,4 @@
-(ns ex1-1)
+(ns ch1.ex1-1)
 
 ;; Exercise 1.1: Below is a sequence of expressions. 
 ;; What is the result printed by the interpreter in response to each expression? 
