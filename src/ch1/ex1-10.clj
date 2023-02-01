@@ -1,4 +1,4 @@
-(ns ch1.1-10)
+(ns ch1.ex1-10)
 
 (comment
   ;; Exercise 1.10: The following procedure computes a mathematical 
