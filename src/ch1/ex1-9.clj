@@ -55,20 +55,16 @@
       (+ (dec a) (inc b))))
 
   (+ 4 5)
-  (if false 5 (+ 3 6))
-  (if false 5 ((if false 6 (+ 2 7))))
-  (if false 5 ((if false 6 ((if false 7 (+ 1 8))))))
-  (if false 5 ((if false 6 ((if false 7 ((if false 8 (+ 0 9))))))))
-  (if false 5 ((if false 6 ((if false 7 ((if false 8 ((if true 9 (...))))))))))
-  (if false 5 ((if false 6 ((if false 7 ((if false 8 9)))))))
-  (if false 5 ((if false 6 ((if false 7 9)))))
-  (if false 5 ((if false 6 9)))
-  (if false 5 9)
+  (if false 5 (+ (dec 4) (inc 5)))
+  (+ 3 6)
+  (if false 6 (+ (dec 3) (inc 6)))
+  (+ 2 7)
+  (if false 7 (+ (dec 2) (inc 7)))
+  (+ 1 8)
+  (if false 8 (+ (dec 1) (inc 8)))
+  (+ 0 9)
+  (if true 9 (...))
   9
 
-  ;; This looks more like iterative process because we pass a kind of state
-  ;; Through arguments until we get the result. When we got our 9
-  ;; all we have to do is to pass it to the top of the stack. 
-  ;; Looks like more optimal approach, it should be easier to optimise this
-  ;; kind of recursion in compiler
+  ;; This is iterative process, stack is not growing at all
   )
