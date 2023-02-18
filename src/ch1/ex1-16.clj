@@ -18,23 +18,17 @@
 
   (defn fast-expt
     [b n]
-    (loop [a 1
-           b b
-           n n]
-      (let [a-multiplier (if (even? n) 1 b)]
+    (defn- inner [acc b n]
+      (let [multiplier (if (even? n) 1 b)]
         (if (= n 0)
-          a
-          (recur (* a-multiplier a) (square b) (half n))))))
+          acc
+          (inner (* multiplier acc) (square b) (half n)))))
+    (inner 1 b n))
 
-  (fast-expt 2 0)
-  ;; 1
-  (fast-expt 1 1)
-  ;; 1
-  (fast-expt 2 2)
-  ;; 4
-  (fast-expt 2 5)
-  ;; 32
-  (fast-expt 2 20)
-  ;; 1048576
+  (fast-expt 2 0)  ;; 1
+  (fast-expt 1 1)  ;; 1
+  (fast-expt 2 2)  ;; 4
+  (fast-expt 2 5)  ;; 32
+  (fast-expt 2 20)  ;; 1048576
 
   :rcf)

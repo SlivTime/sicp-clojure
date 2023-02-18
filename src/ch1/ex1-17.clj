@@ -23,15 +23,16 @@
 
   (defn fast-mul
     [a b]
+    (defn- inner
+      [acc a b]
+      (let [carry (if (odd? b) a 0)]
+        (if (= b 1)
+          (+ a acc)
+          (inner (+ acc carry) (double a) (halve b)))))
     (cond
       (= a 0) 0
       (= b 0) 0
-      (> b a) (fast-mul b a)
-      :else (loop [a a b b acc 0]
-              (let [carry (if (odd? b) a 0)]
-                (if (= b 1)
-                  (+ a acc)
-                  (recur (double a) (halve b) (+ acc carry)))))))
+      :else (inner 0 a b)))
 
   (fast-mul 1000 0)  ;; 0
   (fast-mul 0 1000)  ;; 0
