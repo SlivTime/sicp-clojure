@@ -1,4 +1,5 @@
-(ns ch1.ex1-16)
+(ns ch1.ex1-16
+  (:require [common.math :as m]))
 
 (comment
   ;; Exercise 1.16: Design a procedure that evolves an iterative exponentiation
@@ -13,17 +14,25 @@
   ;; unchanged from state to state is a powerful way to think about 
   ;; the design of iterative algorithms.)
 
-  (defn- square [x] (* x x))
-  (defn- half [x] (quot x 2))
 
   (defn fast-expt
     [b n]
-    (defn- inner [acc b n]
+    (letfn [(inner [acc b n]
+              (let [multiplier (if (even? n) 1 b)]
+                (if (= n 0)
+                  acc
+                  (recur (* multiplier acc) (m/square b) (m/half n)))))]
+      (inner 1 b n)))
+
+  
+  (defn fast-expt
+    [b n]
+    (loop [acc 1  b b n n]
       (let [multiplier (if (even? n) 1 b)]
         (if (= n 0)
           acc
-          (inner (* multiplier acc) (square b) (half n)))))
-    (inner 1 b n))
+          (recur (* multiplier acc) (m/square b) (m/half n))))))
+
 
   (fast-expt 2 0)  ;; 1
   (fast-expt 1 1)  ;; 1
