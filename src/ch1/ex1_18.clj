@@ -1,15 +1,12 @@
-(ns ch1.ex1-18)
+(ns ch1.ex1-18
+  (:require [common.math :as m ]))
 
 (comment
-;; Exercise 1.18: Using the results of Exercise 1.16 and Exercise 1.17, 
-;; devise a procedure that generates an iterative process for multiplying 
-;; two integers in terms of adding, doubling, and halving and uses a 
-;; logarithmic number of steps.
-
-  (defn- square [x] (* x x))
-  (defn- double [n] (+ n n))
-  (defn- halve [n] (quot n 2))
-
+  ;; Exercise 1.18: Using the results of Exercise 1.16 and Exercise 1.17, 
+  ;; devise a procedure that generates an iterative process for multiplying 
+  ;; two integers in terms of adding, doubling, and halving and uses a 
+  ;; logarithmic number of steps.
+  
   (defn fast-expt
     [b n]
     (loop [a 1
@@ -18,7 +15,7 @@
       (let [a-multiplier (if (even? n) 1 b)]
         (if (= n 0)
           a
-          (recur (* a-multiplier a) (square b) (halve n))))))
+          (recur (* a-multiplier a) (m/square b) (m/half n))))))
 
   (defn fast-mul
     [a b]
@@ -30,14 +27,14 @@
               (let [carry (if (odd? b) a 0)]
                 (if (= b 1)
                   (+ a acc)
-                  (recur (double a) (halve b) (+ acc carry)))))))
+                  (recur (m/double a) (m/half b) (+ acc carry)))))))
 
   (fast-expt 2 0)  ;; 1
   (fast-expt 1 1)  ;; 1
   (fast-expt 2 2)  ;; 4
   (fast-expt 2 5)  ;; 32
   (fast-expt 2 20)  ;; 1048576
-
+  
   (fast-mul 1000 0)  ;; 0
   (fast-mul 0 1000)  ;; 0
   (fast-mul 2 2)  ;; 4
