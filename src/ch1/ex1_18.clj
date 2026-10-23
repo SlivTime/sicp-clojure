@@ -27,7 +27,7 @@
               (let [carry (if (odd? b) a 0)]
                 (if (= b 1)
                   (+ a acc)
-                  (recur (m/double a) (m/half b) (+ acc carry)))))))
+                  (recur (m/twice a) (m/half b) (+ acc carry)))))))
 
   (fast-expt 2 0)  ;; 1
   (fast-expt 1 1)  ;; 1
@@ -41,4 +41,7 @@
   (fast-mul 2 3)  ;; 6
   (fast-mul 23 73)  ;; 1679
   (fast-mul 123456789 987654321)  ;; 121932631112635269
+  
+
+  (m/twice 5)
   :rcf)

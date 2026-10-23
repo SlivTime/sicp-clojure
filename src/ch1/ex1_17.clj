@@ -29,7 +29,7 @@
               (let [carry (if (odd? b) a 0)]
                 (if (= b 1)
                   (+ a acc)
-                  (inner (+ acc carry) (m/double a) (m/half b)))))]
+                  (inner (+ acc carry) (m/twice a) (m/half b)))))]
       (cond
         (= a 0) 0
         (= b 0) 0
